@@ -1,0 +1,42 @@
+<!DOCTYPE html>  <!--html5버전임을 명시-->
+<html lang="ko">
+    <head>
+        문서의 정보입력
+
+        - html문서의 제목 
+        <title>HTML 요소 레퍼런스</title>
+        - 기타 정보(메타태그)
+        <meta charset="UTF-8">  <!--이거는 가급적 헤드 최상단에-->
+
+        <!-- EUC-KR: 완성형 -> 정 경 훈 (문자가 깨지는경우발생)
+             UTF-8: 조합형 -> ㅈ ㅓ ㅇ ㄱ ㅕ ㅇ ㅎ ㅜ ㄴ-->
+        <meta name="author" content="나">
+        <meta name="description" content="내 사이트">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"> 인터넷 익스플로러 엣지 최신버전에서 정상작동하게끔
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        - 스타일 직접 입력 및 외부에서 가져옴
+
+        기준경로를 지정해버림(그렇기떄문에 링크태그위에 작성) -> ./css/main_tag.css 를 다쓸 필요가없어짐
+        단, 이 베이스테그는 html파일하나에 딱 한번만 사용할 수 있음
+        <link rel="stylesheet" href="./css/main_tag.css">
+        rel은 필수요소로써 html과 가져올 파일과의 관계임(스타일시트, 아이콘정도)
+        href ./~~ 같은 주소는 상대주소임
+
+
+        <style> 
+            div {
+                color: red;
+                background: blue;
+
+            }
+        </style>
+    </head>
+    <body>
+        문서의 구조입력
+        <base href="https://heropcode.github.io/GitHub-Responsive/img/">
+        <img src="bg-small.jpg" alt="sample">
+        <img src="feature-tile__build.png" alt="sample 2">
+        "https://heropcode.github.io/GitHub-Responsive/img/" 라는 주소가 반복되므로 base 태그로 축약가능
+    </body>
+</html>

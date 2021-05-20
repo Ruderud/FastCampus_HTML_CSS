@@ -1,36 +1,21 @@
-body { 
+body {
     margin: 0;
     padding: 0;
 }
-.header {
-    background-color: white;
-    border-bottom: 1px solid lightgray;   /*선넣어주는 속성*/
+div {
+    background-color: red;
+    width: 100px;
+    height:  30px;
+    margin: 20px;
+    padding: 20px;
+    /*display: inline; 을 쓰면 블록태그를 인라인태그로 쓸수있음*/
 }
-.container {
-    width: 980px;
-    margin: auto;
-}
-.container-left{
-    padding-top: 20px;
-    padding-bottom: 20px;
-}
-.logo {
-    float: left;
-    margin-right: 5px;
-}
-.logo img {
-    display: block;
-}
-.menu{
-    float: left;
-}
-.menu-item {
-    float: left;
-    padding: 8px 10px;
-    /*상하 8px, 좌우 10px준것*/
-}
-.clearfix::after{
-    content: "";
-    display: block;
-    clear: both;
+span {
+    background-color: red;
+    width: 100px;
+    height:  30px;      /*가로, 세로요소를 지정할 수 없다(크기지정 불가)*/
+    margin: 20px;       /*상하의 패딩값을 사용할 수 없는것을 확인가능*/
+    padding: 20px;
+    
+    /*display: block; 을 쓰면 인라인태그를 블록태그로 쓸수있음*/
 }
