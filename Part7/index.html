@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>HTML Elements</title>
+    <link rel="stylesheet" href="./main.css">
+    <script src="./js/main.js" defer></script> <!--defer를 사용하면 body 끝까지 한번 훑고 스크립트를 실행시키므로 없을때와달리 정상작동-->
+</head>
+<body>
+    <img src="./images/410.svg" alt="410Error" > <!--한쪽만 입력하면 비율을 유지해줌-->
+
+    <figure>
+        <img srcset="images/heropy_small.png 400w,
+            images/heropy_medium.png 700w,
+            images/heropy_large.png 1000w"
+            src="images/heropy.png"
+            alt="HEROPY" />    <!--w는 width-->
+    <figcaption>예시 이미지</figcaption>
+        </figure>
+    <img
+    srcset="images/heropy_small.png 1x,
+            images/heropy_medium.png 1.75x,
+            images/heropy_large.png 2.5x"
+    src="images/heropy.png"
+    alt="HEROPY" />         <!--x는 비율을 의미-->
+
+    <img
+        srcset="images/heropy_small.png 400w,
+                images/heropy_medium.png 700w,
+                images/heropy_large.png 1000w"
+        sizes="(min-width: 1000px) 700px"
+        src="images/heropy.png"
+        alt="HEROPY" /> <!--min-width는 최소한 1000px일때는~ 를 의미하며, 그뒤에 700px는 그때 700px로 출력하겠다는 의미이다-->
+
+    <audio src="https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3"
+            controls></audio>
+    
+    <video src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm"
+        controls
+        width="400px"
+
+        loop
+        muted
+        poster="./images/410.svg"></video>
+
+    <iframe src="https://kakao.com" 
+            frameborder="0"
+            width="70%"
+            height="400px"></iframe> <!--중첩된 브라우져 표시(컨텍스트)-->
+
+    <iframe width="560" height="315" 
+    src="https://www.youtube.com/embed/bRBeNiO4qTM" 
+    title="YouTube video player" 
+    frameborder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowfullscreens></iframe>
+
+
+    <canvas id="canvas" width="200" height="150">
+        <script>
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = "rgb(200,0,0)";
+            ctx.fillRect (10, 10, 50, 50);
+
+            ctx.fillStyle = "rgba(0, 0, 200, 0.5)";
+            ctx.fillRect (30, 30, 50, 50);
+        </script>
+    </canvas>
+
+    <div id="my-Name">그아악</div>
+    <script src="./js/main.js" ></script> <!--head에 이 문장을 작성하면
+    순차적 진행으로 인해 아직 body문장을 읽지못한 상태에서 js파일을 실행시키므로 오류발생
+    -->
+    <noscript>
+        여기는 JS실행이 안되네?
+    </noscript> <!--JS실행되는 환경인 index.html에선 안나오지만, nojs.html에서 sandbox로 js구동을 막자, 거기서는 위의 문구가 출력됨-->
+
+</body>
+</html>
