@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>HTML Elements</title>
+    <link rel="stylesheet" href="./main.css">
+</head>
+<body>
+    <table> <!--tr은 가로줄(줄을 먼저), td는 세로줄(행을 나중에), th는 헤더-->
+        <caption>데이터 타입과 값</caption>
+        <colgroup>
+            <col style="background-color: tomato;" span="2">
+            <col>
+            <col>
+        </colgroup>
+        <tr>
+            <th colspan="3" id="th-data">데이터</th>
+        </tr>
+        <tr>
+            <th></th>
+            <th abbr="Type" scope="col" headers="th-data">타입</th>
+            <th abbr="Type" scope="col" headers="th-data">값</th>
+        </tr>
+        <tr>
+            <th>1</th>
+            <td>알파벳</td>
+            <td>A</td>
+        </tr>
+        <tr>
+            <th>2</th>
+            <td>숫자</td>
+            <td>7</td>
+        </tr>
+    </table>
+
+    <br>
+
+    <table>
+        <tr>
+            <th rowspan="2">데이터</th>
+            <th headers="th-data" id="th-type">타입</th>
+            <td >알파벳</td>
+            <td>숫자</td>
+        </tr>
+        <tr>
+
+            <th>값</th>
+            <td>B</td>
+            <td>8</td>
+        </tr>
+    </table>
+</body>
+</html>
