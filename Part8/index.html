@@ -1,53 +1,208 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
-    <meta charset="UTF-8">
-    <title>HTML Elements</title>
-    <link rel="stylesheet" href="./main.css">
+  <meta charset="UTF-8">
+  <title>HTML Elements</title>
+  <link rel="stylesheet" href="./main.css">
 </head>
+
 <body>
-    <table> <!--tr은 가로줄(줄을 먼저), td는 세로줄(행을 나중에), th는 헤더-->
-        <caption>데이터 타입과 값</caption>
-        <colgroup>
-            <col style="background-color: tomato;" span="2">
-            <col>
-            <col>
-        </colgroup>
-        <tr>
-            <th colspan="3" id="th-data">데이터</th>
-        </tr>
-        <tr>
-            <th></th>
-            <th abbr="Type" scope="col" headers="th-data">타입</th>
-            <th abbr="Type" scope="col" headers="th-data">값</th>
-        </tr>
-        <tr>
-            <th>1</th>
-            <td>알파벳</td>
-            <td>A</td>
-        </tr>
-        <tr>
-            <th>2</th>
-            <td>숫자</td>
-            <td>7</td>
-        </tr>
-    </table>
+  <table>
+    <!--tr은 가로줄(줄을 먼저), td는 세로줄(행을 나중에), th는 헤더-->
+    <caption>데이터 타입과 값</caption>
+    <colgroup>
+      <col style="background-color: tomato;" span="2">
+      <col>
+      <col>
+    </colgroup>
+    <tr>
+      <th colspan="3" id="th-data">데이터</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th abbr="Type" scope="col" headers="th-data">타입</th>
+      <th abbr="Type" scope="col" headers="th-data">값</th>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>알파벳</td>
+      <td>A</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>숫자</td>
+      <td>7</td>
+    </tr>
+  </table>
 
-    <br>
+  <br>
 
-    <table>
-        <tr>
-            <th rowspan="2">데이터</th>
-            <th headers="th-data" id="th-type">타입</th>
-            <td >알파벳</td>
-            <td>숫자</td>
-        </tr>
-        <tr>
+  <table>
+    <tr>
+      <th rowspan="2">데이터</th>
+      <th headers="th-data" id="th-type">타입</th>
+      <td>알파벳</td>
+      <td>숫자</td>
+    </tr>
+    <tr>
 
-            <th>값</th>
-            <td>B</td>
-            <td>8</td>
-        </tr>
-    </table>
+      <th>값</th>
+      <td>B</td>
+      <td>8</td>
+    </tr>
+  </table>
+
+  <table>
+    <caption>Fruits</caption>
+    <colgroup>
+      <col span="2" style="background-color: yellowgreen;">
+      <col style="background-color: tomato;">
+    </colgroup>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>F123A</td>
+        <td>Apple</td>
+        <td>$22</td>
+      </tr>
+      <tr>
+        <td>F098B</td>
+        <td>Banana</td>
+        <td>$19</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <br>
+
+  <form action="/login" method="GET" novalidate>
+    <!--GET방식을 쓰면 URL에 전송하는 정보를 담아서 전달하기에 주소에보이게됨. POST를 쓰면 주소에 표기되지는 않음-->
+    <!--post방식을 써도 url에만 안보인다 뿐이지 아직 암호화방법을 쓰지않아서 개발자툴-네트워크-헤더에서 전송한 폼 데이터를 확인가능-->
+    <input type="email" name="email">
+    <input type="password" name="password">
+    <button type="submit">로그인</button>
+  </form>
+
+  <br>
+
+  <input type="text" autofocus maxlength="5">
+
+  <br>
+
+  <form action="/login" method="GET">
+    <input type="email" name="id">
+    <input type="password" name="pw">
+    <input type="submit" value="로그인">
+    <input type="reset" value="초기화">
+  </form>
+
+  <input type="number" value="1234" readonly>
+  <input type="number" value="1234" disabled>
+  <br>
+  <input type="number" placeholder="숫자를입력하세요" max="10" min="2" step="3">
+  <input type="checkbox" checked>
+  <input type="file" multiple>
+
+  <form action="/login">
+    <input type="image" src="./images/410.svg" alt="./images/heropy_large.png">
+  </form>
+  <br>
+  <input type="radio" name="radio1">
+  <input type="radio" name="radio1" checked>
+  <input type="radio" name="radio1">
+  <br>
+  <!-- 라벨 가능 요소를 참조 -->
+  <input type="checkbox" id="user-agreement" />
+  <label for="user-agreement">동의하십니까?</label>
+  <!--텍스트를 클릭해도 체크-->
+  <label>동의하십니까?</label>
+  <!--only 체크박스만-->
+
+  <!-- 라벨 가능 요소를 포함 -->
+  <label><input type="checkbox" />동의하십니까?</label>
+  <!--텍스트를 클릭해도 체크-->
+
+  <label><input type="search">검색</label>
+  <br>
+
+
+  <input type="reset" value="초기화"> <br>
+  <button type="reset">초기화</button><br>
+  <!--위와같은 기능-->
+
+  <button onclick="doit()">클릭하세요</button>
+  <script>
+    function doit() {
+      alert('쩍번!');
+    }
+  </script>
+
+  <br>
+  <textarea placeholder="함써바라마" rows="10"></textarea>
+
+
+  <form>
+    <fieldset>
+      <legend>Coffee Size</legend>
+      <label>
+        <input type="radio" name="size" value="tall" />
+        Tall
+      </label>
+      <label>
+        <input type="radio" name="size" value="grande" />
+        Grande
+      </label>
+      <label>
+        <input type="radio" name="size" value="venti" />
+        Venti
+      </label>
+    </fieldset>
+  </form>
+
+  <br>
+
+  <select name="Fruits" size="10" >
+      <optgroup label="내좋과">
+        <option>Apple</option>
+        <option>Strawberry</option>
+        <option value=""></option>
+      </optgroup>
+      <optgroup label="내싫과">
+        <option selected>Banana</option>
+        <option>Mango</option>
+      </optgroup>
+  </select>
+
+  <input type="text" list="fruits"> <!--리스트의 값과 datalist의 id값이 같아야함!-->
+
+  <datalist id="fruits">
+    <option>Apple</option>
+    <option>Orange</option>
+    <option>Banana</option>
+    <option>Mango</option>
+    <option>Fineapple</option>
+  </datalist><br>
+
+  <progress value="70" max="100">70 %</progress><br> <!--동적데이터를 사용하게되므로 js를 같이 사용함-->
+  <progress value="0.5">70 %</progress><br>
+
+  <progress value="0" max="100" id="test"></progress>
+  <script>
+    const progress = document.querySelector('#test');
+    const interval = setInterval(function() {
+      progress.value +=1;
+      if (progress.value>=100) clearInterval(interval);
+
+    }, 100)
+  </script>
+
+
 </body>
 </html>

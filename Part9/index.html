@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>HTML elements</title>
+    <link rel="stylesheet" href="./main.css">
+
+</head>
+<body>
+    <div class="section"></div>
+    <div class="section"></div>
+    <div class="section"></div> 
+    <!-- 이렇게 클레스는 중복이 가능 -->
+    <div id="section"></div>
+    <!-- <div id="section"></div>
+    id는 중복되면 오류발생! -->
+
+    <script>
+        const section = document.querySelector('.section')
+        const section = document.querySelector('#section')
+    </script>
+
+    <h1 style="color: red; background:blue;">가가가가</h1>
+
+    <h2 title="이 부분은 제목E이다">제목2</h2>
+    <a href="https://google.com" title="google">Google</a>
+    <div title="DIV태그입니다">div</div>
+    <!-- 웹에서 해당 값위에 마우스오버시 팁으로써 나타남 -->
+
+    <p lang="en">English</p>
+    <p lang="ko">한국어</p>
+    <!-- 최상위 html에서 언어종류를 먼저 선언하면 전역에 설정되므로 맨위에 한번만 쓰고 필요하면
+    중간에 한번씩 지정해주면된다 -->
+
+    <div id="me" data-my-name="Rud" data-my-age="5000">Rud</div>
+    <!-- 자바스크립트에서 사용할 데이터를 html단계에서 저장할 수 있음 -->
+    <script>
+        const me = document.getElementById('me');
+        console.log(me.dataset.myName);
+        console.log(me.dataset.myAge);
+    </script>
+
+    <div draggable="true">asdg</div>
+    <!-- 해당값을 드래그 할 수 있게된다 -->
+
+    <form id="hidden-form" action="/form-action" hidden>
+        <input type="text" name="id" value="Rud">
+        <!-- 숨겨진 양식들.. -->
+    </form>
+    <button form="hidden-form" type="submit">전송</button>
+
+    <!-- 대화형콘텐츠: a, iframe, input 등등 -> 기본적으로 탭인덱스값이 0으로 되어있음-->
+    <br>
+    <input type="text" value="1" tabindex="2"><br>
+    <input type="text" value="2"><br>
+    <input type="text" value="3" tabindex="1"><br>
+    <input type="text" value="4"><br>
+    <input type="text" value="5" tabindex="5">
+    
+    <!-- 탭사용시 (3->1->5->) 2->4(여기는 기본적으로 위에서 아래로가 적용) 순서로 흘러가게됨 -->
+    <br>
+    ㅁㄴㅇㅁㅇ
+    <br>
+    <input type="text" value="1"><br>
+    <input type="text" value="2"><br>
+    <input tabindex="0" value="2.5">    <!--탭인덱스를 0으로 할당해서 2다음에 2.5로 이동가능하게댐-->
+    <input type="text" value="3"><br>
+    <input type="text" value="4"><br>
+    <input type="text" value="5"><br>
+
+
+    <!-- html entities -->
+
+    hello      world! <br>
+    <!-- 띄어쓰기 여러번해도 한번으로 간주 -->
+    hello&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;world! <br>
+    <!-- &nbsp; = ' ' 문자열로 인식하여 출력-->
+
+    <h1>
+        &lt;div&gt;&lt;/div&gt;
+        <!-- &lt; = '<'  &gt; = '>' 문자열로 인식하여 출력 -->
+    </h1>
+</body>
+</html>
