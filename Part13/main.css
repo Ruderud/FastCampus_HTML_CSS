@@ -1,0 +1,206 @@
+/* auto는 브라우져가 넒이를 계산 
+박스요소는 가로는 100% 세로는 0을 오토갑으로 가짐
+인라인요소는 가로0 세로0으로 인식하고, 택스트 크기만큼만 나타남
+
++css에서 0을 쓸때는 단위를 쓰지않는것이 좋음
+*/
+
+/* div {
+    background: tomato;
+    height: 100px;
+    width: auto;    
+} */
+
+span {
+    width: 100px;
+    height: 100px;
+    background: hotpink;
+}
+
+/* 
+max-width
+max-height  최대값 없고 최소값 0
+min-width
+min-height
+*/
+
+.parent {
+    width: 100px;
+    height: 300px;
+    border: 4px solid tomato;
+    margin: 20px;
+}
+.child {
+    max-width: 400px;
+    min-width: 200px;
+    height: 200px;
+    background: orange;
+}
+
+
+/* 
+margin은 단축속성으로써 요소의 외부(바깥)여백을 지정(음수도 사용가능은하다!)
+기본값 0
+auto는 자동으로 브라우져가 너비를 계산
+%는 부모요소 너비(w)에 대한 비율로 지정된다! (마진탑,바텀에도 부모요소의 너비길이를 적용한다)
+
+margin: 상 우 하 좌;    (시계방향!)
+        상 [좌,우] 하
+        [상,하] [좌,우]
+        [상,하,좌,우]
+
+-top,bottom,left,right등의 개별속성을 지정할수도 있음
+ */
+
+ .parent2 {
+    width: 400px;
+    height: 200px;
+    border: 4px solid;
+ }
+ .child2 {
+    width: 100px;
+    height: 100px;
+    border: 4px solid;
+    margin: 50%;        /*parent2의 width의 50%를 가지고 상하좌우를 할당한다.*/
+ }
+
+ /* 
+ 마진중복이 생기는경우
+ 1. 형제요소의 마진탑+마진바텀이 만날때
+ 2. 부모요소의 마진 탑끼리, 마진바텀끼리 만날때
+
+ 마진중복 계산은 둘다 양수일경우 더 큰값으로, 둘다 음수일경우에는 더 작은값으로 중복된다
+ 음수와 양수가 만나는경우에는 둘을 합해서(ex -20 + 10 = -10) 중복시킨다.
+ */
+
+ .parent3 {
+
+ }
+ .child3 {
+    width: 100px;
+    height: 100px;
+    background: tomato;
+    /* float: left; 이렇게되면 형제요소간 탑+바텀이 만나면서 마진이 중복된다 */      
+    margin:20px;
+ }
+ 
+.parent4 {
+    width: 300px;
+    height: 200px;
+    background: cyan;
+}
+.child4 {
+   width: 100px;
+   height: 100px;
+   background: tomato;
+   margin-top: 50px;    /*마진중복으로인해 부모요소도 마진을 가지게된다*/
+}
+
+/* 
+패딩은 요소 내부여백을 지정할때 사용 
+
+padding: 상 우 하 좌;           (margin과 똑같이 적용)
+        상 [좌,우] 하
+        [상,하] [좌,우]
+        [상,하,좌,우]
+
+padding을 사용하면 그 패딩크기만큼 요소의 크기가 커지므로, 이를 감안할 수 있어야한다.
+*/
+
+hr {
+    margin: 0;
+    border: 0.1px solid black
+}
+
+.hello {
+    height: 80px;
+    width: 60px;
+    background: tomato;
+    padding: 10px 20px; /*패딩을 추가해서 100x100을 맟추는방법*/
+}
+
+.hello1 {
+    height: 100px;
+    width: 100px;
+    background: turquoise;
+    padding: 10px 20px;
+    box-sizing: border-box;     /*이걸쓰면 직접 상하좌우 계산해서 작성하지않고도 자동으로 100x100이 맟춰진다*/
+}
+
+/*  
+border는 태두리선을 지정 (두께 종류 색상) -> 디폴트값은 medium, none, black
+                (width, style, color)
+단축속성이지만 (width, style, color)각각에 따른 개별속성도 존재
+
+width는 medium thin thick가 있지만, 정확한 길이를 입력하는것이 좋다
+border-width: 상 우 하 좌;    (시계방향!) 이는 이후의 나머지 style color와도 동일하게 적용된다
+              상 [좌,우] 하
+             [상,하] [좌,우]
+             [상,하,좌,우]
+
+border-style: none,hidden(table에서 사용),solid(실선),dotted(점선),dashed(파선),double(두줄선)
+                groove(조각칼로판자국), ridge(조각칼로판만큼 튀어나와있는거), inset(들어간 사진틀모양), outset(튀어나온 사진틀 모양)
+
+transparent는 선의 color요소가 사라지고 배경색이 보이게된다(투명)
+*/
+
+.box {
+    width: 300px;
+    height: 300px;
+    background: violet;
+    padding: 40px;
+    border: 30px inset lightgray ;  /*border의 선두깨만큼 전체크기가 늘어나므로 이것도 계산해줘야함*/
+    /*box-sizing: border-box; 이걸 추가하면 총크기가 300x300이 되도록 맟춰줌*/
+}
+
+/*  
+box-sizing 의 값은
+1. content-box(폭과 높이만가지고 요소의 크기를 계산)
+2. border-box (가로세로크기를 최종크기로 하도록 조정)
+*/
+
+/* 
+display는 요소의 유형을 설정할 수 있다
+지정할 수 있는 값은 
+block, inline, inline-block(인라인요소지만 블록특성을 추가해준것), table, table-cell, flex, none 
+
+특히 none은 요소의 박스타입이 없음 -> 즉 화면에서 요소가 사라짐!
+
+opacity: 0;은 있는데 안보이게하는거지만, display: none; 은 아예 사라진다는점에서 차이가있음
+*/
+
+.box1 {
+    width: 100px;
+    height: 100px;
+    background: tomato;
+    display: inline-block;
+    margin: 50px 0;
+    padding: 20px 0;
+}
+
+/* 
+overflow 요소크기이상으로 내용이 넘쳤을떄, 내용이 보여지는 방식을 제어하게끔 하는것
+지정가능값은
+visible (넘치는 부분을 그냥 다 보여줌)
+hidden  (넘치는 부분을 사라지게함)
+scroll (내용이 넘치든 안넘치든 무조건 스크롤바 생성)
+auto (자동으로 내용이 넘치면 스크롤바를 생성하고, 안넘치면 삭제함)
+
+*/
+
+.parent5 {
+    width: 300px;
+    height: 250px;
+    border: 4px solid;
+    overflow: auto;
+}
+.parent5 .child5 {
+    width: 100px;
+    height: 100px;
+    background: yellowgreen;
+    border: 4px solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+}
