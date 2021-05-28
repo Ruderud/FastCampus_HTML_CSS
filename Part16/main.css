@@ -1,0 +1,72 @@
+/* 
+background : 색 이미지경로 반복 위치 스크롤특성;
+위 방법으로 사용함. 모든요소가 입력될 필욘 없다.
+
+color는 색지정, 투명지정가능
+
+image는 배경에 하나이상의 이미지 삽입가능
+넣을떄는 url("경로(인자)")로 지정
+쉼표로 구분해서 이미지갯수 추가가능 (-image에서)
+
+단, 사용시에는 no-repeat등의 반복되는것을 제어할필요가있음
+
+repeat속성에는 수평(-x)으로 반복, 수직(-y)로 반복이 가능
+no-repeat을 하면 반복 x
+
+positon으로 이미지의 위치를 지정가능
+%로 지정시는 왼쪽상단이 0% 0% 우하단이 100% 100%
+단위랑 방향 각각 지정가능
+
+방향은 순서바꿔도상관없지만, 단위(%,px등)는 x축 y축순서로 입력해야함
+그리고 단위랑 방향을 조합해서 써도가능 (left 50px -> 완쪽벽에 붙은상태에서 위에서 50px내려옴)
+
+attachment는 요소 스크롤시 어떻게 이미지가 보여줄지 정하는 요소
+scroll은 스크롤시 요소에 따라 스크롤 (일반-default)
+fixedㄴㄴ 뷰포트에 고정되어 요소와 같이 스크롤 x (광고)
+
+size로 배경이미지의 크기를 조절가능
+auto는 원래크기로 표기
+단위입력시 px,em,%가능하고, width값만 입력하면 비율을 맟춰서 지정
+cover는 배경이미지의 크기비율을 유지하면서 더 넓은 너비비율로 보여줌(사진짤림)
+contain는 배경이미지의 크기비율을 유지하면서 더 좁은 너비비율로 보여줌(공백나타남)
+
+*/
+
+.box1 {
+    width: 200px;
+    height: 100px;
+    background: tomato ; /*-color를 지워도 ㄱㅊ, 그리고 초기값은 투명상태*/
+    
+}
+.box2 {
+    width: 750px;
+    height: 500px;
+    border: 2px dashed lightgray;
+    background-image:   /*이미지는 먼저삽입한것이 제일 위층에 올라와있음*/
+        url("https://heropy.blog/css/images/vendor_icons/aws.png");
+    /* background-repeat: no-repeat; 이걸로 반복되지않게끔함*/
+    background-size: 100px;
+    background-repeat: no-repeat;
+    background-position: 100px 50%;
+}
+.box3 {
+    width: 5000px;
+    height: 700px;
+    background-image: url("https://heropy.blog/css/images/vendor_icons/html5.png");
+    background-attachment: fixed;   /*이런느낌*/
+    background-size: 50px;
+}
+.container {
+    width: 400px;
+    height: 300px;
+    border: 4px solid red;
+    margin: 50px;
+    overflow: auto;
+    background-image: url("https://heropy.blog/css/images/vendor_icons/html5.png");
+    background-size: 50px;
+    background-attachment: local;   /*박스내에서만 지엽적으로 움직임*/
+}
+.for-scroll {
+    height: 2000px;
+
+}
