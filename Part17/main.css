@@ -1,0 +1,120 @@
+/* transition : css 전환효과
+처음과 끝값을 지정하고, 그 중간값을 애니매이션으로 수행함
+
+property :효과를 사용할 속성이름
+duration: 전환효과의 지속시간 설정  s, ms사용가능하며, 0.x이면 .x로 작성해도 무관
+timing-function: 타이밍함수
+    https://easings.net/ko 에서 각각의 함수의 움직임을 확인할 수 있다.
+    cubic-bezier(n,n,n,n)으로 0~1사이의 값을 정의하여 자신만의 값을 정의할 수 있다
+    steps(n)은 n번 분할된 애니메이션
+delay: 전환효과의 대기시간 설정 (몇초후에 시작할지)
+    transition 2s,3s로 하게되면, 2는 듀레이션, 3은 딜레이값이 된다.
+*/ 
+
+.box {
+    width: 100px;
+    height: 100px;
+    background: tomato;
+    margin: 50px;
+    transition : 2s /*steps(4)*/;
+    /* transition-property: width, background;
+    transition-duration: 1s; 위 단축함수와 같은 의미*/
+    /* transition-timing-function: ease-in-out ; */
+}
+.box:hover {
+    width: 300px;
+    background: dodgerblue;
+}
+
+/*          2D속성
+transform은 요소의 변환효과를 지정함
+세부함수가없고 하나의 함수에 값을 이것저것집어넣는 방식으로 사용
+
+transfrom: rotate(20deg) transrate(10px,0);
+20도 회전, x축 10px이동, y축 고정
+
+transrate / scale / rotate / skew = 이동xy / 크기xy(배수) / 회전(n deg) / 기울임xy
+matrix(n,n,n,n,n,n)으로 위의 값을 지정해서 사용가능 (직접사용할일은 거의없긴함)
+
+*** 요소를 배치하고 끝낼거라면 포지션+방향을 설정해서 하는것이 좋음. 그러나 움직임이 필요할경우에는 tranrate를 쓰는것이 바람직함***
+
+
+*/
+
+.box1 {
+    width: 100px;
+    height: 100px;
+    background: blue;
+    margin: 100px;
+    transform: rotate(45deg);
+    color: whitesmoke;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    font-size: 30px;
+    transition: 1s
+
+}
+.box1:hover {
+    transform: translate(30px, 30px) rotate(90deg); /* "," 를쓰지않고 띄워서 쓴다*/
+}
+
+
+/*      3D
+transrate3d(x,y,z) 이런꼴임
+
+transrate3d / scale3d / rotate3d / perspective 
+
+기본적으로 z축은 화면상 우리의 앞뒤로 움직이는 축이기때문에 그냥은 인지할 수 없음
+그렇기에 perspective view로 봐야 인지가능
+
+*/
+
+img {
+    width: 200px;
+    border: 4px solid lightgray;
+    position: relative;
+    left: 200px;
+
+}
+img:hover {
+    transition: 1s;
+    transform: perspective(1000px) rotateX(45deg) ;
+}
+
+/*
+transform 변환속성
+origin: 요소 변환의 기준점(중심축)을 설정
+    x,y,z축을 설정가능하며, 기본적으로 50%/50%/0으로 한 중앙점을 디폴트값으로함 (0,0,0이면 좌상단, 100%,100%,0이면 우하단인것을 상기)
+
+style: 3D변환요소의 자식요소도 3D변환을 사용할지 설정
+    기본값을 flat으로서, 자식요소는 변환하지않도록함. 하지만 preserve-3d를 적용하면 자식요소의 3d변환도 대물림함
+
+perspactive: 하위요소를 관찰하는 원근거리르 설정
+    거리는 일반적으로 px, cm, em등을 사용함
+    원근거리가 가까울수록 크게 외곡되어 보이고, 멀수록 작게 외곡되어보임
+    perspactive는 속성으로도, 함수로도 사용가능한데, 관찰대상이 여러개라서 부모요소에 사용해야한다면 perspactive{} 꼴로 부모요소위에 작성해서 쓰고
+    관찰대상이 하나라면 transform : perspactive를 집어넣어서 사용함
+
+perspactive origin: 원근거리의 기준점을 설정(처다보는 시점의 위치)
+    50%50% = default 이며 이때는 이미지의 정중앙에서 본다
+    100%를 넘어가면 이미지 외부에서 보게된다.
+    
+    예시)
+    perspactive {
+        perspactive-origin: 100% 50% 
+    }
+
+backface-visibility: 3d변환으로 회전된 요소의 뒷면 숨김을 설정
+    기본적으로 요소를 3d로 움직였을때 뒷면이 보이게 되면 뒷면이 flip해서 보이게되어있다 (default)
+    그러나 backface-visibility: hidden 을 쓰면 뒷면이 보이게되는 순간에 더이상 보이지 않게끔 할 수 있음
+*/
+
+/*
+matrix(a,b,c,d,e,f)
+요소의 2차원 변환효과를 압축적으로 지정한다
+
+변환과정및 요소는 캡쳐한 스샷을 비교해가면서 확인
+
+
+*/
