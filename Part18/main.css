@@ -1,0 +1,211 @@
+/* 
+animation: 애니메이션이름 지속시간 [타이밍함수 대기시간 반복횟수 반복방향 전후상태 재생/정지]; 
+이러한 방법을 통해 transition보다 풍부한 표현이 가능
+
+@keyframes라는 규칙을 선언해주어야한다!
+-> 2개이상(0%~100%)의 애니메이션 중간상태(프레임)을 지정
+
+animation-duration: 애니메이션이 지속되는 시간
+
+animation-timing-function: transition-timing-function과 똑같은 역할
+
+animation-delay: transition-delay와 똑같은 역할 (음수사용할수있음. 다만 이때는 바로시작되지만 그값만큼 애니메이션이 앞서서 시작함)
+
+animation-iteration-count: 애니메이션 반복횟수. 숫자를적으면 그만큼, infinity를 적으면 무한히 반복
+
+animation-direction: 애니메이션 반복방향설정
+    normal(정방향), reverse(역방향)
+    alternate(정방향->역방향으로 왕복) alternate-reverse(역방향->정방향왕복)
+
+animation-fill-mode: 애니메이션의 전 후 위치를 설정
+    none        처음위치->작동위치->작동->종료위치->처음위치
+    forword     처음위치->작동위치->작동->"종료위치"
+    backword    "작동위치"->작동->종료위치->처음위치
+    both        작동위치->작동->종료위치
+
+animation-play-state: 애니메이션의 재생과 정지를 설정
+    running(default)과 paused두가지가 있고 각각 수행/정지한다.
+
+++CSS가지고는 html에 있는 값을 바꿀수있는 방법은 없다! js를 써야함
+    유사하게쓰려면, ::의 가상요소선택자를 선언해서 집어넣어야함
+
+*/
+
+.box {
+    width: 100px;
+    height: 100px;
+    background:tomato;
+
+}
+.box:hover {
+    /*animation: first-ani 3s      infinite   alternate;
+                 이름       지속시간  반복횟수      도달했을때 다시 되돌아감*/
+
+    animation-name: first-ani;
+    animation-duration: 300ms;
+}
+
+@keyframes first-ani { /*100->500->300->500->100... 반복*/
+    0% {
+        width: 100px;
+    }
+    75% {
+        width: 500px;
+        background: dodgerblue;
+    }
+    100% {
+        width: 300px;
+        background: yellowgreen;
+    }
+}
+
+.boxx {
+    width: 150px;
+    height: 100px;
+    border-radius: 10px ;
+    margin: 10px;
+    color:white;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.box1 { background: tomato;}
+.box2 { background: dodgerblue;}
+.box3 { background: yellowgreen;}
+
+.box1:hover {
+    animation: size-up 1s 2 alternate /*0s ->이건 딜레이의 위치. duration뒤에만 적으면된다!*/;
+    animation-timing-function: linear;
+    animation-delay: 0s;
+}
+.box2:hover {
+    animation: size-up 1s 2 alternate linear 1s;
+}
+.box3:hover {
+    animation: size-up 1s 2 alternate;
+    animation-timing-function: linear;
+    animation-delay: -1s;
+}
+
+@keyframes size-up {
+    0% {
+        width: 150px;
+    }
+    100%{
+        width: 500px;
+    }
+}
+
+.box4 {
+    width: 150px;
+    height: 150px;
+    margin: 10px;
+    border-radius: 10px ;
+    background: sienna;
+    animation: move .5s linear 2 alternate/*정방향으로 가는데 한번, 역방향으로 가는데 한번, 왕복에 총 2의 횟수를 사용함*/;
+}
+
+@keyframes move {
+    0% {
+        transform: translate(0,0);
+    }
+    25% {
+        transform: translate(100px,0);
+    }
+    50% {
+        transform: translate(100px, 100px);
+    }
+    75% {
+        transform: translate(0,100px);
+    }
+    100% {
+        transform: translate(0,0);
+    }
+}
+
+.box5 {
+    width: 150px;
+    height: 150px;
+    margin: 10px;
+    border-radius: 10px ;
+    background: green;
+    animation: movemove 2s 2s;  
+    animation-fill-mode: both;  /*원래대로라면 동작전위치에서 100px, 100px이동해서 300,100으로 움직이고 다시 원래 위치로 돌아오지만,
+                                이 명령어를 사용하면 애니메이션 시작위치에서 시작, 동작, 애니매이션 끝위치에서 종료된디*/
+}
+@keyframes movemove {
+    0% {
+        transform: translate(100px,100px);
+        background: dodgerblue;
+    }
+    100% {
+        transform: translate(300px,100px);
+        background: dodgerblue;
+    }
+}
+
+.box6 {
+    width: 150px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: black;
+    position: relative;
+    top: 200px;
+    animation: movemovemove 1s linear infinite alternate;
+}
+.box6::before{
+    content: "움직여!";
+    color: blanchedalmond;
+}
+.box6:hover{
+    animation-play-state: paused;
+}
+.box6:hover::before {
+    content: "멈춰!";
+}
+
+
+@keyframes movemovemove {
+    0% {
+        width: 150px;
+    }
+    100% {
+        width: 500px;
+    }
+}
+
+
+/* 
+multi-columns : 일반 블록 레이아웃을 확장하여, 여러택스트 다단으로 쉽게정리하여(줄글을 신문처럼) 가독성UP
+
+columns: 다단을 정의
+    auto는 브라우저가 단의 너비와 개수를 설정
+    columns-width 단의 최적너비를 설정 -> auto는 브라우저가 지정, px/em/cm으로 각각 지정가능
+        각 단이 줄어들수 있는 최소너비를 설정하여, 하나의 단이 최적너비보다 줄어들경우에 단의 개수를 브라우저가 조정하게끔하는 기준값
+    columns-count 단의 갯수를 설정
+
+    column-gap: 단과 단사이의 간격. 이떄 지정값중 em은 폰트의 사이즈를 기준으로함.
+
+    column-rule: 단과 단사이의 구분선을 지장
+        width는 선의 두게
+        style은 선의 종류
+        color는 선의 색상을 지정한다 (기본적으로는 요소의 글자색과 동일)
+
+
+*/
+p {
+    position: relative;
+    top:300px;
+
+    color:cadetblue;
+
+    column-width: 150px;
+    column-count: 3;
+    /*columns: 150px 3; 과 같음*/
+    column-gap: 20px;
+    text-align: justify;    /*문장 양쪽맟춤!*/
+    column-rule: 5px double ; /*이처럼 색을 지정하지않으면 폰트색을 따라간다는 것을 확인가능*/
+}
