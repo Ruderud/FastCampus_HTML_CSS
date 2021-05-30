@@ -1,0 +1,163 @@
+.container {
+    border: 2px solid red;
+    display: inline-flex;
+}
+.container .item {
+    width: 100px;
+    height: 100px;
+    border: 2px solid;
+    border-radius: 10px;
+    float: left;
+}
+
+/*  
+clearfix등을 이용한 방법은 약간 편법에 가까웠고 귀찮은방법이므로
+display flex를 사용해서 수평정렬을 하는게 좋다
+
+flex 내용정리
+https://heropy.blog/2018/11/24/css-flexible-box/
+
+플랙스는 기본적으로 상-하로 쌓이는 블록요소의 특성을 가진다
+하지만 인라인 플랙스는 인라인요소처럼 좌-우순서로 나타남
+
+flex-direction은 컨테이너 내의 아이탬들의 주 축을 설정함
+- row는 수평, column은 수직축정렬 (뒤에 reverse를 붙이면 역방향으로 정렬)
+- 여기서 row를 설정하면 주축은 수평 교차축은 수직축이된다. (column이면 당연히 반대)
+- flex-start는 시작점, flex-end는 끝점. reverse이면 이것이 반대로 뒤집히게되겠지?
+    이는 교차축에 대해서도적용되며 상->하, 좌->우 순서가 기본이다
+
+flex-wrap은 컨테이너내의 아이탬들에 대한 여러줄 묶음을 설정함
+nowrap : 한줄로표시 (기본값)
+wrap: (길이가 벗어날정도가되면)줄바꿈시행, reverse를 적용하면 좌하단->우하단->좌상단 순서의 역방향으로 나열된다
+
+
+
+*/
+
+
+.container1 {
+    border: 4px solid;
+    display: flex;
+    flex-wrap: wrap-reverse; 
+}
+.container1 .item1 {
+    width: 150px;
+    height: 100px;
+    background: tomato;
+    border: 4px dashed red;
+}
+
+/* 
+justify-content: 주축의 정렬방법을 설정함
+flex start/end
+center
+space-between/around
+이렇게 5가지가있음 (사진참조)
+
+
+
+*/
+
+.container2{
+    border :4px solid;
+    display: flex;
+    justify-content: space-around;
+}
+
+.container2 .item2 {
+    width: 100px;
+    height: 100px;
+    background: gray;
+    border: 4px solid;
+}
+
+/* 
+align-content는 교차축의 정렬방법을 설정한다
+주의할점! flex-wrap을 통해 여러줄이 생성되어있을때 + 여백이 있을때에만 사용가능
+
+stretch 컨테이너 교차축을 채우기위해 아이탬들을 늘려버림
+flex-start/end 각줄의 시작/끝점으로 정렬
+center 아이템 가운데정렬
+space-between/around 양끝에 아이템두고 공백정렬 / 공백을 양끝에두고 정렬
+(content에만 존재하는 정렬방법)
+
+
+내부아이템들이 한줄로써 나열되어있을경우에는 align-items를 사용해야함
+
+stretch 컨테이너 교차축을 채우기위해 아이탬들을 늘려버림
+flex-start/end 각줄의 시작/끝점으로 정렬
+center 아이템 가운데정렬
+baseline 아이탬속에 있는 문자열을 기준으로 정렬 (items에만 있는 정렬방법!)
+
+
+
+*/
+
+.container3 {
+    width: 400px;
+    height: 400px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-around;
+
+}
+.container3 .item3 {
+    width: 120px;
+    height: 100px;
+    background: green;
+    border: 4px dashed black;
+
+}
+
+/*  
+flex item에 지정하는 속성들
+order: 아이템의 순서를 설정함. 아이템에 숫자를 지정하고 클수록 순서가 밀리며 음수허용가능
+    기본적으로 0이 디폴트값으로 배정되어있음. html에 배정된 값하고 별개로 비중을 별개로 지정하여 정리할 수 있기때문에 유용함
+    숫자가 작을수록 앞, 클수록 뒤로감
+
+flex: 
+flex-grow: item의 증가너비비율을 설정 1,2,1이면 폭이 1:2:1로 그려짐
+flex-shrink 
+flex-basis 
+
+align-self
+*/
+
+.container4 {
+    border:4px solid;
+    display: flex;
+}
+.container4 .item4 {
+    width: 100px;
+    height: 100px;
+    background: tomato;
+    border: 4px dashed red;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.item4:nth-child(3) {
+    order: -1;      /*3이 맨처음*/
+}
+
+
+.container5 {
+    border: 4px solid;
+    display: flex;
+}
+.container5 .item5 {
+
+    height: 100px;
+    background: skyblue;
+    border: 4px dashed red;
+}
+.item5:nth-child(1) {
+    flex-grow: 1;
+}
+.item5:nth-child(2) {
+    flex-grow: 2;
+}
+.item5:nth-child(3) {
+    flex-grow: 30;
+}
