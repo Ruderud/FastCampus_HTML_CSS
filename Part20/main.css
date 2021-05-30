@@ -1,0 +1,199 @@
+/* 인트로영상: 
+그리드는 템플릿-행/열로 각각의 길이를 지정해서 배치를 지정할 수 있음
+또한 새로운 단위인 fr을 사용할 수 있음.
+fr은 컨테이너내에서 각각의 아이탬이 가져가는 길이 비율을 말하고
+repeat(3,1fr)이런식으로쓰면 3개행/열의 비울을 1:1:1 로 가져가게끔 할 수 있음
+
+다만 각각의 아이템에 폭/너비를 늘려서 컨테이너의 범주를벗어나 행/열이 새로 생기게 되면
+이것은 암시적행 행/열이 생성되었다고 한다 */
+
+
+/*  
+display: grid / inline-grid 지정해서 그리드 선언가능
+그냥 그리드는 블록요소같은 컨테이너, 인라인그리드는 인라인 요소같은 컨테이너를 만들게됨
+
+gird-template-rows: 명시적 행의 크기(개수)를 정렬함
+gird-template-columns: 명시적 열의 크기(개수)를 정렬함
+
+grid-template-areas:지정된 그리드영역이름(grid-area)를 참조해서 그리드 탬플릿을 생성함
+
+
+*/
+
+.container {
+    display: grid;
+    border: 4px solid lightgray;
+    grid-template-columns: repeat(3, 1fr); /*화면크기를 1:1로 하는 열 2개를 만듬
+        repeat()은 repeat(4, 10px 20px 30px)도 가능하며 이는 10 20 30이 4번반복된 총 12줄을 만드는 것과 동일한 기능을 함
+        */
+    grid-template-rows: [first] 100px [second] 100px [third] 100px [fourth] 100px;
+                    /*[라인의 이름] -> 이렇게 이름을 각각지정가능하나, 딱히 지정할 필요가없으면 숫자만 써서 100px 100px...이렇게 써도 무방하다
+                    이렇게 이름을 지정하면 이걸로 grid-columns: first/second; 처럼 이름을 지정해서 크기를 지정가능
+                    */
+}
+/*
+.container > * {
+border: 4px solid red;  을 쓰면 컨테이너내부의 모든태그에 대해 태두리 부여한다는 의미
+}
+*/
+
+.item {
+    border: 4px solid red;
+    font-size: 30px;
+}
+.item:nth-child(1) {
+    grid-column: 1/3;   /*1번줄~3번줄까지 2칸을 할당*/
+    grid-row: 1/3;      /*1번행~3번행까지 2칸을 할당 ->총 2x2
+                        각 속성을 '/'를 구분점으로 앞/뒤를 지정하는것임을 주의*/
+}
+.item:nth-child(2) {
+    grid-row: 1/3;
+}
+.item:nth-child(4) {
+    grid-row: 4/5;
+    grid-column: -1/2;
+}
+.item:nth-child(5) {
+    grid-column: span 2; /*원래 배정되어있는행/열의r 선을기준으로하여 총 2칸까지 확장한다는 의미
+    start는 +, end는 -의 의미를 가지는데, 이는 스샷확인*/
+}
+.container1 {
+    display: grid;
+    /*
+    grid-template-rows: repeat(3, 100px);
+    grid-template-columns: repeat(3,1fr);
+    grid-template-areas: 
+    "header header header"
+    "main . aside"         -> "."은 빈칸을 의미!
+    ". footer footer";
+    row-gap: 30px;  행과 행사이간격
+    column-gap: 15px;   열과 열사이의 간격
+    gap: 30px 15px; 위와같은 의미
+    */
+
+    grid-template: 
+        "header header header" 100px    /*오른쪽의 값은 각행의 높이*/
+        "main . aside" 100px
+        ". footer footer" 100px
+        / 1fr 1fr 1fr;      /*위의 내용과 동일하다!*/
+        /*밑의 값은 각열의 폭을 의미*/
+
+
+}
+.item1 {
+    border: 10px solid green
+}
+.item1:nth-child(1) {
+    grid-area: header;
+}
+.item1:nth-child(2) {
+    grid-area: main;
+}
+.item1:nth-child(3) {
+    grid-area: aside;
+}
+.item1:nth-child(4) {
+    grid-area: footer;
+}
+
+/*
+그리드에서는 행과행사이의 간격을 gutter라고 한다
+
+grid-auto-columns/rows 그리드의 암시적 행/열에 배치되게되는 아이템들의 크기를 지정한다.
+    이게 지정되어있지않으면 정상적으로 출력되지않는다!
+    그리고 이것을 이용해서 생성한 암시적인 행/열에서는 음수를 지정하여 사용할 수 없다
+
+grid-auto-flow 배치하지 않은 아이템을 어떤방식의 자동배치 알고리즘을 처리할지 정의하는 방법
+    row;행축을 따라 순차적 배치 (교차행을 기준점으로해야 순서를 매길수 있겠지?)
+    column:각열축을 따라 차례로 배치 (위의 개념으로 접근)
+
+grid는 grid-template-xxx와 grid-auto-xxx의 단축속성을 의미 (xxx는 rows,columns같은내용들을 의미)
+
+grid : 100px 100px / auto-flow 150px; 이라고하면 행이 100, 열이 100 그리고 / 뒤는 오토플로우로 암시적 열의 크기가 150px이라는 의미
+
+grid :  auto-flow 150px / 100px 100px;  여기서의 150px은 그리드-오토-플로우가 앞에있으므로 row값을 가지고, row의 길이가 150px임을 의미
+
+
+grid :  auto-flow dense 150px / 100px 100px; 여기서150px는 그리드오토플로우가 앞에있고 dence값이 부여되어있으므로,
+                                            row dence값이 되며, 그 길이가 150px가 된다.
+*/
+
+
+/*  
+align-content는 그리드 콘텐츠를 수직(열축)정리하는 요소
+justify-content는 그리드 콘텐츠를 수평(행축)정리하는 요소
+
+적용값은 아래와 같다.
+stretch (기본값)
+start/end 
+center 
+space-between/around
+
+align-items는 그리드 아이템들을 수직(열축)정리하는 것은 위와같지만, 
+    사용하기 위한 추가조건은 그리드 아이템의 세로 너비가 자신이 속한 그리드 행의 크기보다 작아야함
+    (즉 각각의 분할된 셀속 아이템에 대한 처음/끝 중간/늘이기 이런정렬이라고 생각)
+justify-item 위의정렬기준이 수평(행축)정리로 바뀌었다고 인지
+
+*/
+
+/*
+align-self는 단일 그리드아이템을 수직(열축)정렬. 각각의 세부아이템하나씩에 대해서 적용한다고 생각!
+justify-self 위의 적용방법을 수평(행축)정렬한다는 점.
+
+*/
+
+/*
+order는 그리드아이템이 자동배치되는 순서를 변경하게끔하며
+음수일수록 앞, 정수일수록 뒤 (오름차순)로 배치된다.
+
+z-index는 그리드 아이템들이 사용자가 보는 z축상에 겹치는 순서를 정의함(position에서의 z개념과 동일하다!)
+
+*/
+
+
+/* 
+repeat(반복횟수, 세부내용)는 반복을 정의하는 함수
+이때 선의 이름은 중복선언가능하다
+[a] 10px [b a] 10px [b]는               [b a]로 연속된 선을 a,b를 지정한다는것에 주의
+= repeat(2, [a] 10px [b]) 와 같다 
+
+minmax(최소값, 최대값) 행과 열의 최소/최대크기를 정의함
+이떄 지정최대값 이하로 컨테이너가 줄어들면 해당 아이템의 넘치는 부분은 암시적행/열로 배정된다
+
+fit-content() 함수는 해당 아이탬의 행/열 크기를 그리드 아이탬이 포함하는 내용크기에 맞춘다. 내용의 최대크기를 인수로 사용한다.
+grid-template-xxx: fit-content(200px) fit-content(300px);
+    -> 아이탬이 늘어나는 최대 한도 높이가 200px, 폭길이가 300px이라고 한것.
+*/
+
+/* 단위
+fr단위는 위에서 본것과 같이 사용가능한 공간에 대한 비율을 의미함.
+1fr 2fr 100px 25% -> 4번째는 전체의 25퍼, 3번째는 100px, 나머지 1,2번째 아이탬은 배정후 남은 공간을 1:2로 나누어 가져가서 배정함
+
+min-content는 해당 컨텐츠를 최소한 줄일 수 있는대로 줄였을때 가지는 폭/높이를 지정
+"window mac"가 아이템 컨텐츠일ㄸ때
+-> window (window 라는 단어는 훼손되지 않게끔)
+   mac
+(단, 한글에 대해서는 word-break: keep-all;이라는 명령어로 한글이 각 글자별로 쪼개지지 않게 해야함
+안그러면 "가나다라 마바사"에 대해서
+가
+나
+다
+... 이런꼴로 쪼개짐)
+
+반대로 max-content는 해당 컨텐츠가 가질 수 있는 최대한의 폭/높이를 지정한다
+->window mac
+*/
+
+
+/*
+auto-fill, auto-fit
+행/열의 갯수를 그리드 컨테이너 및 지정한 행/열크기에 맞게 자동으로(암시적)조정하게해줌
+repeat과 같이 사용하며, 행/열 또는 아이템 개수가 명확할 필요가 없거나 명확하지않는경우 유용
+
+repeat(auto-fill, minmax(120px,1fr))이면
+컨테이너의 크기에 따라서 행의 갯수가 변하면서 아이탬의 크기와 배치를 최대한 컨테이너에 맞게끔 조정해줌
+
+fill의 fit의 차이는 남은공간에 대한 처리방법에 따라 다름
+
+fill은 빈공간이 있으면 그대로 두고, fit은 아이탬의 크기를 조정해서 남은공간을 최대한 제거한다
+*/
