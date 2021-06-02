@@ -46,5 +46,34 @@ var name = "john";
 
 ```
 
+<hr>
 
++ new 생성자 함수와 프로토타입 체이닝
+
+js는 모든함수가 객체임.
+
+```js
+function User(name) {
+    this.name = name;
+    this.isAdmin = false;
+  }
+  
+let user = new User("Jack"); // User {name: 'Jack', isAdmin: false} 출력
+```
+
+그렇기에 함수이자 객체인 User를 기준으로 user를 만들었다고 봐야함.
+
+
+
+이는 프로토타입 체이닝을 통해서 함수 User와 user가 연결되어있음. (밑은 다른예시)
+
+![스크린샷 2021-06-02 오전 11.36.59](/Users/jeong-gyeonghun/Desktop/Coding/Fastcampus/Part25/스크린샷 2021-06-02 오전 11.36.59.png)
+
+(https://velog.io/@sik2/JS-CoreJavaScript-%ED%94%84%EB%A1%9C%ED%86%A0%ED%83%80%EC%9E%85-%EC%B2%B4%EC%9D%B4%EB%8B%9DPrototype-Link-Prototype-Object)
+
+이렇게 생성된 new 생성자함수는 재사용 목적이 없는 단호출용 객체 생성에 효율적임 (사용후, 해당 객체는 프로토타입 체이닝으로 가비지컬렉션에 의한 소가가 되지 않는다 생각할 수도 있지만, 스코프 범위를 벗어나면 사라지게 되어있음. 물론 스코프가 전역이라면 사라지지않겠지)
+
+-> 서로 연관되어있는 체이닝관계가 불편해서 ES6에서 constructor() {}라는 생성자 함수가 추가되었다
+
+<hr>
 
