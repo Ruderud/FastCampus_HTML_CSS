@@ -77,3 +77,12 @@ let user = new User("Jack"); // User {name: 'Jack', isAdmin: false} 출력
 
 <hr>
 
+This 를 사용할때 고려해야할 4가지 경우
+
+1. new랑 같이 쓰일때
+2. 명시적 바인딩을 사용했을 때(call, apply, bind)
+3. 암시적 바인딩을 사용했을때(객체 내부에서 사용)
+4. 전역에서 사용
+
+<hr>
+
